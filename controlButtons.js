@@ -5,7 +5,7 @@ reset.addEventListener("click",()=>{
     result = 0;
     endOfGame = false;
     array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    let freeArray = [0,1,2,3,4,5,6,7,8];
+    freeArray = [0,1,2,3,4,5,6,7,8];
     for(let cell of cells){
         if(cell.classList.contains("p1") || cell.classList.contains("p2")){
             cell.classList.remove("p1");
