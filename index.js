@@ -15,7 +15,7 @@ let array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 let player = "p1";
 let result = 0;
 let id;
-let changer = 0;
+let changer = 0;    //defines a game mode, 1 = against bot, 2 = multiplayer, 0 = starting position
 let endOfGame = false;
 let winnerExists = false;
 table.style.pointerEvents = 'none';
@@ -25,7 +25,7 @@ const cellPressed = e => {
     
         e.target.classList.toggle("disabled");
         if (changer == 1) {
-
+            
             e.target.classList.add(player);
             id = e.target.id;
             array[id] = player;

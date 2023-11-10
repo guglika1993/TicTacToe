@@ -1,13 +1,13 @@
 reset.classList.toggle("disabled");
 reset.disabled = true;
 
-inputCheckbox.addEventListener("click", ()=>{
-    if(inputCheckbox.checked){
-         player = "p2";
-         document.querySelector("#o").style.backgroundColor = "yellow";
-         document.querySelector("#x").style.backgroundColor = "white";
+inputCheckbox.addEventListener("click", () => {
+    if (inputCheckbox.checked) {
+        player = "p2";
+        document.querySelector("#o").style.backgroundColor = "yellow";
+        document.querySelector("#x").style.backgroundColor = "white";
     }
-    else{
+    else {
         player = "p1";
         document.querySelector("#x").style.backgroundColor = "yellow";
         document.querySelector("#o").style.backgroundColor = "white";
@@ -18,13 +18,13 @@ reset.addEventListener("click", () => {
     document.querySelector("#rulesAndMore").classList.add("hide");
     table.style.pointerEvents = 'none';
     buttonClick.play();
-     array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-     freeArray = [0,1,2,3,4,5,6,7,8];
-     player = "p1";
-     result = 0;
-     changer = 0;
-     winnerExists = false;
-     endOfGame = false;
+    array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    freeArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    player = "p1";
+    result = 0;
+    changer = 0;
+    winnerExists = false;
+    endOfGame = false;
     for (let cell of cells) {
         if (cell.classList.contains("p1") || cell.classList.contains("p2")) {
             cell.classList.remove("p1");
@@ -43,6 +43,9 @@ reset.addEventListener("click", () => {
     toggleColor();
 })
 bot.addEventListener("click", () => {
+    if (player == "p2") {
+        findRandomFreeCell(freeArray);
+    }
     document.querySelector("#rulesAndMore").classList.add("hide");
     table.style.pointerEvents = 'auto';
     buttonClick.play();
