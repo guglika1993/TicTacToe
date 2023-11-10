@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
+    <script src="soundEffects.js"></script>
     <title>TicTacToe</title>
 </head>
 
-<body>
+<body onload="toggleColor()">
     <div class="container">
         <div class="buttonsAndTable">
+            <div class="text">Welcome to my TicTacToe</div>
             <div class="buttons">
                 <button id="bot" class="controlButton" type="button"><span>Against Bot</span></button>
                 <button id="mp" class="controlButton" type="button"><span>Multiplayer</span></button>
@@ -29,6 +31,8 @@
                     </div>
                 </div>
                 <div class="rows">
+                    <div id="rulesAndMore"><span>Hey!</span><p id="result">This is my first TicTacToe game, 
+                        please, first choose a role (X or O) and only after that a game mode</p></div>
                     <div id="3" class="cells">
                         
                     </div>
@@ -56,7 +60,12 @@
         </div>      <!-- buttonsAndTable end -->
         <div class="rightSide">
             <button id="reset" class="controlButton" "reset"><span>Reset</span></button>
-            <div class="text">Choose a game mode to play</div>
+            <div id="x">X</div>
+            <label class="switch">
+                <input id="checkbox" type="checkbox">
+                <span class="slider"></span>
+              </label>
+              <div id="o">O</div>
         </div>
 
     <script src="index.js"></script>

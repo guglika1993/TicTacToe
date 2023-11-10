@@ -1,7 +1,7 @@
 function mP(e){
         e.target.classList.add(player);
         id = e.target.id;        
-        setTimeout(() => {         //to color a cell before alert message
+                //to color a cell before alert message
             if (player == "p1") {
                 array[id] = player;
                 checkWinner(array, player);
@@ -13,9 +13,9 @@ function mP(e){
                 player = "p1";
             }
             ++result;
-            if (result == 9) {
-                alert("End of game!");
-                table.style.pointerEvents = 'none';
+            if (result == 9 && winnerExists==false) {
+                document.querySelector("#rulesAndMore").innerHTML = ("Draw!");
+                showResult();   
             }
-        }, 100)
+        
     }
