@@ -2,28 +2,35 @@ const cells = document.querySelectorAll(".cells");
 const container = document.querySelector(".container");
 const table = document.querySelector(".table");
 const inputCheckbox = document.querySelector("#checkbox");
+const headerText = document.querySelector("#span");
+const welcome = document.querySelector("#welcome");
+const children = headerText.children;
+/////////// INPUTS /////////////////////
+const inputsDiv = document.querySelector("#inputs");
+const textDiv = document.querySelector("#resultP");
+const name1Input = document.querySelector("#p1Input");
+const name2Input = document.querySelector("#p2Input");
 /////////control buttons//////////////////////////
 const bot = document.querySelector("#bot");
 const multiplayer = document.querySelector("#mp");
 const reset = document.querySelector("#reset");
+const start = document.querySelector("#start");
+const again = document.querySelector("#newGameButton");
 /////////////////   sound effects  ///////////////////////////////////
 const buttonClick = new Audio("button-click.wav");
 const cellHover = new Audio("cell-hover.wav");
 const cellClick = new Audio("laser-gun-shot.wav");
 ///////////////default values///////////////////////////
-let array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-let player = "p1";
-let result = 0;
-let id;
-let changer = 0;    //defines a game mode, 1 = against bot, 2 = multiplayer, 0 = starting position
-let endOfGame = false;
-let winnerExists = false;
-table.style.pointerEvents = 'none';
-/////////////////////////////////////////////////////////
+
+let p1Name, p2Name, p1Score, p2Score, array, freeArray, player, result, id, changer, endOfGame, 
+winnerExists, defaultStringReplaced;
+let defaultString = "Let's play again. Choose a role and a game mode";
+
+
 
 const cellPressed = e => {
     
-        e.target.classList.toggle("disabled");
+        e.target.style.pointerEvents = 'none';
         if (changer == 1) {
             
             e.target.classList.add(player);
@@ -40,7 +47,7 @@ const cellPressed = e => {
             if (result == 9 && winnerExists==false) {
                 document.querySelector("#rulesAndMore").innerHTML = ("Draw!");
                 showResult();   
-            }
+            }           
         }
         else if (changer == 2) {
             mP(e);              //run multiplayer mode
@@ -63,12 +70,13 @@ function checkWinner(arr, who) {
         checkArray(arr[0], arr[4], arr[8]) ||
         checkArray(arr[2], arr[4], arr[6])
     ) {
+        for(let cell of cells){
+            cell.style.pointerEvents = 'none';
+        }
         winnerExists = true;
-        document.querySelector("#rulesAndMore").innerHTML = (`Player${who[1]} Won!`);
+        decideWinnerName();
         showResult();
-
         endOfGame = true;
-        table.style.pointerEvents = 'none';
     }
 }
 //checks array values
@@ -93,9 +101,52 @@ function toggleColor(){
 }
 
 function showResult() {
-    document.querySelector("#rulesAndMore").style.transitionDuration = "0.5s";
-    document.querySelector("#rulesAndMore").style.opacity = "1";
-    document.querySelector("#rulesAndMore").style.paddingBottom = "10px";
+    defaultStringReplaced = true;
     document.querySelector("#rulesAndMore").classList.remove("hide");
+    document.querySelector("#rulesAndMore").style.backgroundColor = "rgba(20,80,81,1)";
+    document.querySelector("#welcomeSpan").classList.add("hide");
+    textDiv.classList.remove("hide");
+    textDiv.style.textAlign = "center";
+    textDiv.style.textAlign = "center";
+    name1Input.classList.add("hide");
+    name2Input.classList.add("hide");
+    start.classList.add("hide");
+    showScores();
+    inputCheckbox.disabled = false;
 }
+
+function decideWinnerName() {
+    
+    if (!inputCheckbox.checked) {
+        if (player == "p1"){
+            textDiv.innerHTML = (`${p1Name} is winner!`);
+            ++p1Score;
+        }
+        else{
+            textDiv.innerHTML = (`${p2Name} is winner!`);
+            ++p2Score;
+        }
+    }
+    else if (inputCheckbox.checked) {
+        if (player == "p1"){
+            textDiv.innerHTML = (`${p2Name} is winner!`);
+            ++p2Score;
+        }
+        else{
+            textDiv.innerHTML = (`${p1Name} is winner!`);
+            ++p1Score;
+        }
+    }
+}
+
+function showScores(){
+    headerText.classList.remove("hide");
+    welcome.classList.add("hide");
+    again.classList.remove("hide");
+    children[0].innerHTML = (p1Name);
+    children[1].innerHTML = (p1Score);
+    children[3].innerHTML = (p2Score);
+    children[4].innerHTML = (p2Name);
+}
+
 

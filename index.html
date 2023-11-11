@@ -9,10 +9,21 @@
     <title>TicTacToe</title>
 </head>
 
-<body onload="toggleColor()">
+<body onload="resetF()">
     <div class="container">
         <div class="buttonsAndTable">
-            <div class="text">Welcome to my TicTacToe</div>
+            
+            <div class="text">
+                <div id="welcome">Welcome to my Game!</div>
+                <div id="span" class="hide">
+                    <span class="name">p1</span>&nbsp;
+                    <span class="score">0</span>
+                    <span style="color: yellow;">:</span>
+                    <span class="score">0</span>&nbsp;
+                    <span class="name">p2</span>
+                </div>
+                <button class="smallButton hide" id="newGameButton" type="button">Again</button>
+            </div>
             <div class="buttons">
                 <button id="bot" class="controlButton" type="button"><span>Against Bot</span></button>
                 <button id="mp" class="controlButton" type="button"><span>Multiplayer</span></button>
@@ -21,57 +32,68 @@
             <div class="table">
                 <div class="rows">
                     <div id="0" class="cells">
-                        
+
                     </div>
                     <div id="1" class="cells">
-                        
+
                     </div>
                     <div id="2" class="cells">
-                        
+
                     </div>
                 </div>
-                <div class="rows">
-                    <div id="rulesAndMore"><span>Hey!</span><p id="result">This is my first TicTacToe game, 
-                        please, first choose a role (X or O) and only after that a game mode</p></div>
-                    <div id="3" class="cells">
+                <div id="row" class="rows">
+                    <div id="rulesAndMore"><span id="welcomeSpan">Hey!</span>
                         
+                        <div id="resultDiv">
+                            <p id="resultP">This is my first TicTacToe game,
+                            please, first choose a role (X or O) and only after that a game mode</p>
+                        </div>
+                        <div id="inputs">
+                            <input id="p1Input" type="text" placeholder="Name of player 1">
+                            <input id="p2Input" type="text" placeholder="Name of player 2">
+                            <button class="smallButton" id="start" type="button">Start</button>
+                        </div>
+                        
+                    </div>
+                    <div id="3" class="cells">
+
                     </div>
                     <div id="4" class="cells">
-                        
+
                     </div>
                     <div id="5" class="cells">
-                        
+
                     </div>
                 </div>
                 <div class="rows">
                     <div id="6" class="cells">
-                        
+
                     </div>
                     <div id="7" class="cells">
-                        
+
                     </div>
                     <div id="8" class="cells">
-                        
+
                     </div>
-            </div>  
-            
-        </div>      <!-- table end -->
-        
-        </div>      <!-- buttonsAndTable end -->
+                </div>
+
+            </div> <!-- table end -->
+
+        </div> <!-- buttonsAndTable end -->
         <div class="rightSide">
             <button id="reset" class="controlButton" "reset"><span>Reset</span></button>
             <div id="x">X</div>
             <label class="switch">
                 <input id="checkbox" type="checkbox">
                 <span class="slider"></span>
-              </label>
-              <div id="o">O</div>
+            </label>
+            <div id="o">O</div>
         </div>
 
-    <script src="index.js"></script>
-    <script src="againstBot.js"></script>
-    <script src="multiplayer.js"></script>
-    <script src="controlButtons.js"></script>
+        <script src="index.js"></script>
+        <script src="againstBot.js"></script>
+        <script src="multiplayer.js"></script>
+        <script src="controlButtons.js"></script>
 </body>
 
 </html>

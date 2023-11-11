@@ -1,10 +1,7 @@
-let freeArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 let cell;
 
 function findRandomFreeCell(ar) {
-    console.log(player + " on start bot move")
     table.style.pointerEvents = 'none';
-
     let rand = Math.floor(Math.random() * freeArray.length);
     cell = freeArray[rand];
 
@@ -17,7 +14,7 @@ function findRandomFreeCell(ar) {
         cellClick.play();
         if (cell != undefined) {
             document.getElementById(`${cell}`).classList.add(player);
-            document.getElementById(`${cell}`).classList.toggle("disabled");
+            document.getElementById(`${cell}`).style.pointerEvents = 'none';
             array[cell] = player;
         }
         checkWinner(array, player);
@@ -27,9 +24,11 @@ function findRandomFreeCell(ar) {
         } else {
             player = "p1";
         }
-        table.style.pointerEvents = 'auto';
-
+    
     }, 500)
 
+    setTimeout(() => {
+        table.style.pointerEvents = 'auto';
+    },600);
 
 }

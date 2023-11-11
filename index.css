@@ -1,15 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@600&display=swap');
+
 body{
+    /* background-image: url("space2.jpg"); */
     background-color: black;
+    font-family: 'Urbanist', sans-serif;
 }
 .container{
     position: relative;
     max-width: 980px;
-    width: 90%;
+    width: fit-content;
     margin: 0 auto;
     border-radius: 20px;
-    box-shadow: 0px 0px 30px 8px #698E8E;
+    box-shadow: 0px 0px 30px 15px #2b384e;
+    /* box-shadow: 0px 0px 30px 8px #698E8E; */
     background-color: darkslategrey;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
 }
 
@@ -18,7 +24,7 @@ body{
 }
 
 .cells{
-    background-color: gray;
+    background-color: #008080;
     width: 100px;
     height: 100px;
     border: 1px solid black;
@@ -27,7 +33,7 @@ body{
 }
 
 .cells:hover{
-    background-color: rgb(177, 173, 173);
+    background-color: #1f3e5a;
     /* background-color: rgb(201, 100, 100); */
 }
 
@@ -59,7 +65,7 @@ body{
     justify-content: space-around;
     width: auto;
     height: 50px;
-    background-color: rgb(47, 49, 47);
+    background-color: #1c253c;
 }
 .controlButton{
     background-color: #d447b6(255, 120, 120);
@@ -111,26 +117,37 @@ body{
     pointer-events: none;
 }
 
-@media only screen and (max-width: 10000px){
-    .container{
-        width: fit-content;
-        flex-direction: column;
-    }
-}
-
 .text{
-    color: white;
+    position: relative;
     font-weight: bold;
-    font-style: oblique;
     font-size: larger;
     user-select: none;
     background-color: rgb(12, 12, 12);
     width: auto;
     height: auto;
-    text-align:center;
+    min-height: 30px;
     padding: 10px;
     border: none;
     border-radius: 20px 20px 0 0;
+}
+.text #welcome{
+    color: yellow;
+    margin-top: 5px;
+    text-align: center;
+}
+.text .name{
+    color: yellow;
+}
+.text .score{
+    color: red;
+}
+#span{
+    max-width: 100%;
+    text-align: center;
+}
+#newGameButton{
+    margin-left: 70px;
+    margin-top: 5px;
 }
 
 .rightSide{
@@ -145,20 +162,19 @@ body{
 
 
 #rulesAndMore{
-    user-select: none;
     position: absolute;
-    background-color: white;
+    background-color: rgba(20,80,81, 0.8);
+    opacity: 1;
     width: 200px;
     height: auto;
     margin: -50px 50px 50px 50px;
     padding-top: 10px;
-    opacity: 1;
     border-radius: 20px;
     text-align: center;
-    font-weight: bold;
-    box-shadow: 0px 0px 20px 5px;
+    box-shadow: 0px -5px 20px 5px;
     border: none;
     animation: 1s ease-in 0s 1 slideInLeft;
+   
 }
 @keyframes slideInLeft {
     0% {
@@ -168,12 +184,49 @@ body{
       opacity: 1;
     }
   }
-#rulesAndMore p{
-    text-align: justify;
-    margin: 10px 10px;
+#rulesAndMore span{
+    color: white;
+    user-select: none;
+    margin-bottom: 0px;
     font-weight: bold;
 }
-
+#inputs{
+    margin: 5px 10px 10px 10px;
+}
+#p1Input, #p2Input{
+    font-style: oblique;
+    margin-bottom: 4px;
+    padding-left: 10px;
+    border-radius: 10px;
+    border: none;
+    height: 20px;
+}
+.smallButton{
+    width: 50%;
+    height: 20px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.smallButton:hover{
+    background-color: rgb(201,100,100);
+    color: white;
+}
+.smallButton:active{
+    background-color: rgb(131,9,9);
+}
+#resultDiv{
+    user-select: none;
+    text-align: justify;
+    margin: 4px 5px;
+}
+#resultP{
+    color:white;
+    border-bottom: 2px solid;
+    padding-bottom: 2px;
+    margin: 0 0 10px 0;
+}
 
 .hide{
     display: none;
@@ -197,7 +250,7 @@ body{
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin: 18px 5px;
+    margin: 20px 5px;
   }
   
   .switch input { 
@@ -242,3 +295,5 @@ body{
     background-color: #473d3d;
     color: white;
   }
+
+/*/////////////////>>>>>>>>>>>  INTRO PAGE BELOW<<<<<<<<<///////////////*/
