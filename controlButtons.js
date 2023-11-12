@@ -112,6 +112,8 @@ again.addEventListener("click", ()=>{
     showScores();
     decideMode();
     toggleColor();
+    bot.classList.add("disabled");
+    mp.classList.add("disabled");
 })
 
 function disableEnable() {
@@ -180,7 +182,12 @@ function decideName(){
     else{
         console.log("Mode not choosen!");
     }
-    
+    player1.name = sliceName(player1.name);
+    player2.name = sliceName(player2.name);
+}
+
+let sliceName = (name)=>{
+    return name.slice(0,8);
 }
 
 

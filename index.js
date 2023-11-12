@@ -122,6 +122,7 @@ function showResult() {
     name2Input.classList.add("hide");
     start.classList.add("hide");
     inputCheckbox.disabled = false;
+    showScores();
 }
 
 function decideWinnerName(who) {
