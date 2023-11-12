@@ -200,6 +200,7 @@ body{
     border-radius: 10px;
     border: none;
     height: 20px;
+    width: 160px;
 }
 .smallButton{
     width: 50%;
