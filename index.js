@@ -23,20 +23,27 @@ const cellClick = new Audio("laser-gun-shot.wav");
 ///////////////default values///////////////////////////
 
 let p1Name, p2Name, p1Score, p2Score, array, freeArray, player, result, id, changer, endOfGame, 
-winnerExists, defaultStringReplaced;
-let defaultString = "Let's play again. Choose a role and a game mode";
+winnerExists, defaultStringReplaced, player1, player2, whosTurn, cell,
+defaultString = "Let's play again. Choose a role and a game mode",
+firstLoad = true;
 
-
-
+window.addEventListener("load", ()=>{
+    resetF();
+    const spinner = document.querySelector(".spinner");
+    spinner.classList.add("spinner-hidden");
+    spinner.addEventListener("transitionend", ()=>{
+    document.body.removeChild(spinner);
+    })
+})
 const cellPressed = e => {
     
         e.target.style.pointerEvents = 'none';
         if (changer == 1) {
             
-            e.target.classList.add(player);
+            e.target.classList.add(player1.role);
             id = e.target.id;
-            array[id] = player;
-            checkWinner(array, player);
+            array[id] = player1.role;
+            checkWinner(array, player1.name);
             freeArray = freeArray.filter((value) => { return value != id });
 
             if (!endOfGame && result < 8) {
@@ -45,11 +52,12 @@ const cellPressed = e => {
             }
             ++result;
             if (result == 9 && winnerExists==false) {
-                document.querySelector("#rulesAndMore").innerHTML = ("Draw!");
+                textDiv.innerHTML = "Draw!";
                 showResult();   
             }           
         }
         else if (changer == 2) {
+
             mP(e);              //run multiplayer mode
         }
     }
@@ -74,7 +82,7 @@ function checkWinner(arr, who) {
             cell.style.pointerEvents = 'none';
         }
         winnerExists = true;
-        decideWinnerName();
+        decideWinnerName(who);
         showResult();
         endOfGame = true;
     }
@@ -91,10 +99,12 @@ const checkArray = (a, b, c) => {
 
 function toggleColor(){
     if(inputCheckbox.checked){
+        player = "p2";
         document.querySelector("#o").style.backgroundColor = "yellow";
         document.querySelector("#x").style.backgroundColor = "white";
     }
     else{
+        player = "p1";
         document.querySelector("#o").style.backgroundColor = "white";
         document.querySelector("#x").style.backgroundColor = "yellow";
     }
@@ -111,42 +121,29 @@ function showResult() {
     name1Input.classList.add("hide");
     name2Input.classList.add("hide");
     start.classList.add("hide");
-    showScores();
     inputCheckbox.disabled = false;
 }
 
-function decideWinnerName() {
-    
-    if (!inputCheckbox.checked) {
-        if (player == "p1"){
-            textDiv.innerHTML = (`${p1Name} is winner!`);
-            ++p1Score;
+function decideWinnerName(who) {
+        if (player1.name == who){
+            
+            ++player1.score;
         }
         else{
-            textDiv.innerHTML = (`${p2Name} is winner!`);
-            ++p2Score;
+            
+            ++player2.score;;
         }
-    }
-    else if (inputCheckbox.checked) {
-        if (player == "p1"){
-            textDiv.innerHTML = (`${p2Name} is winner!`);
-            ++p2Score;
-        }
-        else{
-            textDiv.innerHTML = (`${p1Name} is winner!`);
-            ++p1Score;
-        }
-    }
+        textDiv.innerHTML = (`${who} is winner!`);
 }
 
 function showScores(){
     headerText.classList.remove("hide");
     welcome.classList.add("hide");
     again.classList.remove("hide");
-    children[0].innerHTML = (p1Name);
-    children[1].innerHTML = (p1Score);
-    children[3].innerHTML = (p2Score);
-    children[4].innerHTML = (p2Name);
+    children[0].innerHTML = (player1.name);
+    children[1].innerHTML = (player1.score);
+    children[3].innerHTML = (player2.score);
+    children[4].innerHTML = (player2.name);
 }
 
 

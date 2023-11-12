@@ -1,24 +1,21 @@
-reset.classList.toggle("disabled");
-reset.disabled = true;
-
 inputCheckbox.addEventListener("click", () => {
     if (inputCheckbox.checked) {
-        player = "p2";
+        player1.role = "p2";
+        player2.role = "p1";
         document.querySelector("#o").style.backgroundColor = "yellow";
         document.querySelector("#x").style.backgroundColor = "white";
     }
     else {
-        player = "p1";
+        player1.role = "p1";
+        player2.role = "p2";
         document.querySelector("#x").style.backgroundColor = "yellow";
         document.querySelector("#o").style.backgroundColor = "white";
     }
-    // document.querySelector("#rulesAndMore").classList.add("hide");
 })
 
 reset.addEventListener("click", resetF);
 
 function resetF(){
-    
     document.querySelector("#rulesAndMore").classList.remove("hide");
     document.querySelector("#rulesAndMore").style.backgroundColor = "rgba(20,80,81,0.8)";
     if(defaultStringReplaced){
@@ -32,22 +29,20 @@ function resetF(){
     headerText.classList.add("hide");
     welcome.classList.remove("hide");
     again.classList.add("hide");
-    buttonClick.play();
+    firstLoad ? firstLoad=false : buttonClick.play();
     for(let cell of cells){
         cell.style.pointerEvents = 'none';
     }
+    player1 = new Player("player1", 0, "p1");
+    player2 = new Player("player2", 0, "p2");
+    whosTurn = player1.name;
     array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     freeArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    player = "p1";
     id = -1;
     result = 0;
     changer = 2;
     winnerExists = false;
     endOfGame = false;
-    p1Name = "";
-    p2Name = "";
-    p1Score = 0;
-    p2Score = 0;
     for (let cell of cells) {
         if (cell.classList.contains("p1") || cell.classList.contains("p2")) {
             cell.classList.remove("p1");
@@ -68,6 +63,7 @@ function resetF(){
 
 
 bot.addEventListener("click", () => {
+    buttonClick.play();
     changer = 1;
     textDiv.classList.add("hide");
     if(changer == 1){
@@ -77,6 +73,7 @@ bot.addEventListener("click", () => {
 })
 
 mp.addEventListener("click", () => {
+    buttonClick.play();
     changer = 2;
     textDiv.classList.add("hide");
     if(changer == 1){
@@ -90,8 +87,8 @@ mp.addEventListener("click", () => {
 
 start.addEventListener("click", ()=>{
     inputCheckbox.disabled = true;
-    decideName();
     decideMode();
+    decideName();
     showScores();
 })
 
@@ -110,10 +107,11 @@ again.addEventListener("click", ()=>{
     winnerExists = false;
     endOfGame = false;
     result = 0;
-    player = "p1";
     array = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     freeArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     showScores();
+    decideMode();
+    toggleColor();
 })
 
 function disableEnable() {
@@ -121,7 +119,7 @@ function disableEnable() {
     buttonClick.play();
     mp.classList.toggle("disabled");
     bot.classList.toggle("disabled");
-    reset.classList.toggle("disabled");
+    reset.classList.remove("disabled");
     bot.disabled = true;
     mp.disabled = true;
     reset.disabled = false;
@@ -129,14 +127,25 @@ function disableEnable() {
 }
 
 function decideMode(){
+    if(player1.role == "p1"){
+        whosTurn = player1.name;
+    }
+    else{
+        whosTurn = player2.name;
+    }
+
     if(changer == 1){
-        if (player == "p2") {
-            findRandomFreeCell(freeArray);
-        }
-        else if(player == "p1"){
+        console.log(whosTurn);
+        if(whosTurn == player1.name){
             for(let cell of cells){
                 cell.style.pointerEvents = 'auto';
             }
+        }
+        else{
+            for(let cell of cells){
+                cell.style.pointerEvents = 'auto';
+            }
+            findRandomFreeCell(freeArray);
         }
         disableEnable();
     }
@@ -150,24 +159,28 @@ function decideMode(){
 }
 
 function decideName(){
+    let saxeli, saxeli2;
     if (changer == 1) {
-        p1Name = name1Input.value.trim();
-        if(p1Name == ""){
-            p1Name = "Player";
+        saxeli = name1Input.value.trim();
+        if(saxeli != ""){
+            player1.name = saxeli;
         }
-        p2Name = "Bot";
+        player2.name = "Bot";
     }
     else if (changer == 2){
-        p1Name = name1Input.value.trim();
-        p2Name = name2Input.value.trim();
-        if(p1Name == ""){
-            p1Name = "Player";
+        saxeli = name1Input.value.trim();
+        saxeli2 = name2Input.value.trim();
+        if(saxeli != ""){
+            player1.name = saxeli;
         }
-        if(p2Name == ""){
-            p2Name = "Player2";
+        if(saxeli2 != ""){
+            player2.name = saxeli2;
         }
     }
     else{
         console.log("Mode not choosen!");
     }
+    
 }
+
+
